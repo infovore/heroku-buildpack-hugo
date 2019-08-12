@@ -1,9 +1,13 @@
-Heroku buildpack: Hugo
+Heroku-style buildpack for Hugo-extended
 ===
 
-This is a [Heroku buildpack](https://devcenter.heroku.com/articles/buildpacks)
-for sites powered by [Hugo](https://github.com/spf13/hugo).
-It uses the latest stable version of Hugo.
+This is a [Heroku buildpack](https://devcenter.heroku.com/articles/buildpacks) for sites powered by [Hugo](https://github.com/spf13/hugo). Unlike the [original version of this buildpack](https://github.com/roperzh/heroku-buildpack-hugo/), it specifically uses hugo-extended. 
+
+It currently uses Hugo-extended v0.54.0 by default; you can override this by setting the environment variable `HUGO_VERSION`.
+
+Note that you must correctly define the environment version as it is shown on the [hugo releases page](https://github.com/gohugoio/hugo/releases), as a number with no prefixed 'v'. That means it should be in the semver format `x.x.x`, eg `0.56.3`.
+
+This code has been tested and known to work with [Dokku][https://github.com/dokku/dokku] (which is why I built it in the first place).
 
 Usage
 ===
@@ -11,13 +15,13 @@ Usage
 Create a Heroku application using this buildpack:
 
 ```bash
-$ heroku create --buildpack https://github.com/roperzh/heroku-buildpack-hugo.git
+$ heroku create --buildpack https://github.com/infovore/heroku-buildpack-hugo.git
 ```
 
 or configure your existent application:
 
 ```bash
-$ heroku buildpacks:set BUILDPACK_URL="https://github.com/roperzh/heroku-buildpack-hugo.git"
+$ heroku buildpacks:set BUILDPACK_URL="https://github.com/infovore/heroku-buildpack-hugo.git"
 ```
 
 Optionally, define a `HUGO_VERSION` Config Var to specify the Hugo version you wish to use:
@@ -47,15 +51,10 @@ To fetch the great [hyde](https://github.com/spf13/hyde.git) theme:
 https://github.com/spf13/hyde.git
 ```
 
-[Here](http://immense-hollows-6319.herokuapp.com/) is an example application,
-and [here](https://github.com/roperzh/example-heroku-buildpack-hugo) is the code.
-
 Alternative method
 ---
 
-If you don't like the idea of a `.hugotheme` file, you can simply manage your
-themes with [git submodules](http://git-scm.com/book/en/Git-Tools-Submodules).
-Heroku will take care to fetch all the submodules in your project.
+If you don't like the idea of a `.hugotheme` file, you can simply manage your themes with [git submodules](http://git-scm.com/book/en/Git-Tools-Submodules). Heroku will take care to fetch all the submodules in your project.
 
 Important notes
 ===
@@ -80,7 +79,7 @@ License
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Roberto Dip
+Copyright (c) 2015, 2019 Roberto Dip, Tom Armitage
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
